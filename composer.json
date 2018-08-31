@@ -1,0 +1,25 @@
+{
+    "name": "mega/mega-http",
+    "description": "swoole coroutine http client",
+    "type": "library",
+    "require": {
+        "guzzlehttp/psr7": "^1.4",
+        "ext-json": "*",
+        "ext-swoole": "^4.0.0"
+    },
+    "license": "mit",
+    "authors": [
+        {
+            "name": "rain",
+            "email": "chenjiarong448@qq.com"
+        }
+    ],
+    "require-dev": {
+        "eaglewu/swoole-ide-helper": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "MegaHttp\\": "src/"
+        }
+    }
+}
