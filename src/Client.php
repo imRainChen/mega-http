@@ -55,7 +55,7 @@ class Client
                              'timeout'    => $options['timeout'],
                              'keep_alive' => $options['keep_alive']
                          ]);
-            $this->handleRequest($client, $method, $uri, $options);
+            return $this->handleRequest($client, $method, $uri, $options);
         }
 
         return false;
