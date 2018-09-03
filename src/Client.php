@@ -66,8 +66,12 @@ class Client
         return $this->request('GET', $uri, $options);
     }
 
-    public function post($uri, array $options = [])
+    public function post($uri, array $params, array $options = [])
     {
+        if (!empty($params))
+        {
+            $options['form_params'] = $params;
+        }
         return $this->request('POST', $uri, $options);
     }
 
