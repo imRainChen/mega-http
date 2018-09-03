@@ -7,7 +7,6 @@
  */
 
 require __DIR__ . '/../vendor/autoload.php';
-
 //go(function() {
 //    $client = new \MegaHttp\Client([
 //        'base_uri' => '127.0.0.1:8901/api/',
@@ -33,19 +32,15 @@ go(function() {
                                        'base_uri' => '127.0.0.1:8901/api/',
                                        'use_pool' => true,
                                        'pool' => [
-                                           'initial_size' => 0,
+                                           'initial_size' => 2,
                                            'max_size' => 2,
-                                           'checkout_timeout' => 1,
-                                           'acquire_retry_attempts' => 2,
                                        ]
                                    ]);
 
-
-
-        $cap = 3;
+        $cap = 2;
         $chan = new chan($cap);
         go(function() use(&$client, $chan) {
-            $rsp = $client->request("get", 'oauth/xd');
+            $rsp = $client->request("get", 'http://127.0.0.1:8901/api/oauth/xd');
             $chan->push($rsp);
         });
         go(function() use(&$client, $chan) {
@@ -53,15 +48,8 @@ go(function() {
             $chan->push($rsp);
         });
         go(function() use(&$client, $chan) {
-            try
-            {
             $rsp = $client->request("get", 'oauth/xd');
             $chan->push($rsp);
-            }
-            catch (\RuntimeException $e)
-            {
-                var_dump('111');
-            }
         });
 
         $result = [];
@@ -75,6 +63,8 @@ go(function() {
         }
         $client->close();
 });
+
+
 
 //$server = new swoole_server("127.0.0.1", 9503);
 //$server->on('connect', function ($server, $fd){
