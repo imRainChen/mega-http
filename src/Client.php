@@ -149,7 +149,7 @@ class Client
     protected function handleRequest(HttpClient $client, string $method, UriInterface $uri, $options)
     {
         $method = strtoupper($method);
-        $path   = $uri->getPath();
+        $path   = (string)$uri->withFragment('');
 
         if (isset($options['headers']))
         {
